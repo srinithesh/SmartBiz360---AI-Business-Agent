@@ -12,13 +12,13 @@ const OrderList: React.FC<OrderListProps> = ({ orders, onUpdateOrder }) => {
 
   const getStatusColor = (status: OrderStatus) => {
     switch (status) {
-      case OrderStatus.Pending: return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case OrderStatus.Confirmed: return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-      case OrderStatus.ReadyForDelivery: return 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200';
-      case OrderStatus.OutForDelivery: return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
-      case OrderStatus.Delivered: return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case OrderStatus.Cancelled: return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-      default: return 'bg-gray-100 text-gray-800';
+      case OrderStatus.Pending: return 'bg-yellow-200 text-yellow-900 dark:bg-yellow-800 dark:text-yellow-100';
+      case OrderStatus.Confirmed: return 'bg-blue-200 text-blue-900 dark:bg-blue-800 dark:text-blue-100';
+      case OrderStatus.ReadyForDelivery: return 'bg-indigo-200 text-indigo-900 dark:bg-indigo-800 dark:text-indigo-100';
+      case OrderStatus.OutForDelivery: return 'bg-purple-200 text-purple-900 dark:bg-purple-800 dark:text-purple-100';
+      case OrderStatus.Delivered: return 'bg-green-200 text-green-900 dark:bg-green-800 dark:text-green-100';
+      case OrderStatus.Cancelled: return 'bg-red-200 text-red-900 dark:bg-red-800 dark:text-red-100';
+      default: return 'bg-gray-200 text-gray-900';
     }
   };
 
@@ -29,42 +29,42 @@ const OrderList: React.FC<OrderListProps> = ({ orders, onUpdateOrder }) => {
   };
 
   if (orders.length === 0) {
-    return <p className="text-center text-gray-500 p-4">No orders found.</p>;
+    return <p className="text-center text-on-surface-variant p-6">No orders found.</p>;
   }
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-        <thead className="bg-gray-50 dark:bg-gray-700">
+      <table className="min-w-full divide-y divide-outline/20">
+        <thead className="bg-surface">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Order ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Customer</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Amount</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-on-surface-variant uppercase tracking-wider">Order ID</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-on-surface-variant uppercase tracking-wider">Customer</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-on-surface-variant uppercase tracking-wider">Amount</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-on-surface-variant uppercase tracking-wider">Status</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-on-surface-variant uppercase tracking-wider">Date</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-on-surface-variant uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
-        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+        <tbody className="bg-surface divide-y divide-outline/20">
           {orders.map((order) => (
             <tr key={order.id}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{order.id}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm">{order.customerName}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm">${order.amount.toFixed(2)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-on-surface">{order.id}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-on-surface-variant">{order.customerName}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-on-surface-variant">${order.amount.toFixed(2)}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(order.status)}`}>
+                <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(order.status)}`}>
                   {order.status}
                 </span>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm">{order.date}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-on-surface-variant">{order.date}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 {order.status === OrderStatus.Confirmed && (
-                    <Button variant="secondary" size="sm" onClick={() => handleGenerateOTP(order)}>
+                    <Button variant="outlined" size="sm" onClick={() => handleGenerateOTP(order)}>
                         Generate OTP
                     </Button>
                 )}
                  {order.status === OrderStatus.Pending && (
-                    <Button variant="secondary" size="sm" onClick={() => onUpdateOrder({...order, status: OrderStatus.Confirmed})}>
+                    <Button variant="outlined" size="sm" onClick={() => onUpdateOrder({...order, status: OrderStatus.Confirmed})}>
                         Confirm
                     </Button>
                 )}

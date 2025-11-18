@@ -10,17 +10,17 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ children, className, header, footer }) => {
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden ${className}`}>
+    <div className={`bg-surface text-on-surface rounded-xl shadow-sm border border-outline/20 overflow-hidden ${className}`}>
       {header && (
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="p-4 border-b border-outline/20">
           {header}
         </div>
       )}
-      <div className="p-4">
+      <div className="p-6">
         {children}
       </div>
       {footer && (
-        <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
+        <div className="p-4 bg-surface-variant/20 border-t border-outline/20">
           {footer}
         </div>
       )}

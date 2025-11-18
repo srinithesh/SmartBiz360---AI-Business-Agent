@@ -15,12 +15,12 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose }) => {
     return () => clearTimeout(timer);
   }, [onClose]);
 
-  const baseClasses = 'fixed top-5 right-5 z-50 px-4 py-3 rounded-md shadow-lg text-white animate-fade-in-down';
+  const baseClasses = 'fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg text-white animate-fade-in-down';
   
   const typeClasses = {
     success: 'bg-green-500',
-    info: 'bg-blue-500',
-    error: 'bg-red-500',
+    info: 'bg-secondary',
+    error: 'bg-error text-on-error',
   };
 
   return (

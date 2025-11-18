@@ -18,7 +18,7 @@ function App() {
 
   return (
     <AuthProvider value={{ user, login: handleLogin, logout: handleLogout }}>
-      <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+      <div className="min-h-screen bg-background text-on-background">
         {user ? <DashboardLayout /> : <LoginScreen />}
       </div>
     </AuthProvider>

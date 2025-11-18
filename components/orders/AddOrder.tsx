@@ -60,26 +60,26 @@ const AddOrder: React.FC<AddOrderProps> = ({ onAddOrder }) => {
 
   return (
     <Card header={<h2 className="text-xl font-semibold">Add New Order</h2>}>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Input label="Customer Name" value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="e.g., John Doe" required />
-        <Input label="Amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="e.g., 150.00" required />
-        <Input label="Assigned To" value={employee} onChange={e => setEmployee(e.target.value)} placeholder="e.g., Bob or Self" required />
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <Input label="Customer Name" value={customerName} onChange={e => setCustomerName(e.target.value)} required />
+        <Input label="Amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
+        <Input label="Assigned To" value={employee} onChange={e => setEmployee(e.target.value)} required />
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Payment Type</label>
-          <select value={paymentType} onChange={e => setPaymentType(e.target.value as any)} className="w-full rounded-md dark:bg-gray-700 dark:border-gray-600">
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Payment Type</label>
+          <select value={paymentType} onChange={e => setPaymentType(e.target.value as any)} className="w-full rounded-md p-2 bg-surface-variant/60 dark:bg-surface-variant/30 border border-outline/50">
             <option value="Full">Full Payment</option>
             <option value="Advance">Advance</option>
             <option value="Credit">On Credit</option>
           </select>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 pt-2">
             <Button type="submit" className="w-full">Add Order</Button>
             {hasSupport && (
-                <Button type="button" variant="secondary" onClick={startListening} disabled={isListening} className="w-full">
+                <Button type="button" variant="outlined" onClick={startListening} disabled={isListening} className="w-full">
                 {isListening ? 'Listening...' : 'Add with Voice'}
                 </Button>
             )}
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-error text-sm">{error}</p>}
         </div>
       </form>
     </Card>
@@ -87,4 +87,3 @@ const AddOrder: React.FC<AddOrderProps> = ({ onAddOrder }) => {
 };
 
 export default AddOrder;
-

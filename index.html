@@ -5,8 +5,54 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartBiz360 - AI Business Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      :root {
+        --md-sys-color-primary: #4f46e5;
+        --md-sys-color-on-primary: #ffffff;
+        --md-sys-color-primary-container: #e0e7ff;
+        --md-sys-color-on-primary-container: #0d006a;
+        --md-sys-color-secondary: #5e5c71;
+        --md-sys-color-on-secondary: #ffffff;
+        --md-sys-color-secondary-container: #e4e0f9;
+        --md-sys-color-on-secondary-container: #1b1a2c;
+        --md-sys-color-error: #ba1a1a;
+        --md-sys-color-on-error: #ffffff;
+        --md-sys-color-background: #fffbff;
+        --md-sys-color-on-background: #1c1b1f;
+        --md-sys-color-surface: #fffbff;
+        --md-sys-color-on-surface: #1c1b1f;
+        --md-sys-color-surface-variant: #e5e1ec;
+        --md-sys-color-on-surface-variant: #47464f;
+        --md-sys-color-outline: #787680;
+        font-family: 'Roboto', sans-serif;
+      }
+      .dark {
+        --md-sys-color-primary: #c0c1ff;
+        --md-sys-color-on-primary: #272277;
+        --md-sys-color-primary-container: #4f46e5;
+        --md-sys-color-on-primary-container: #e0e0ff;
+        --md-sys-color-secondary: #c8c4dc;
+        --md-sys-color-on-secondary: #2f2e42;
+        --md-sys-color-secondary-container: #464459;
+        --md-sys-color-on-secondary-container: #e4e0f9;
+        --md-sys-color-error: #ffb4ab;
+        --md-sys-color-on-error: #690005;
+        --md-sys-color-background: #1c1b1f;
+        --md-sys-color-on-background: #e6e1e6;
+        --md-sys-color-surface: #1c1b1f;
+        --md-sys-color-on-surface: #e6e1e6;
+        --md-sys-color-surface-variant: #47464f;
+        --md-sys-color-on-surface-variant: #c8c5d0;
+        --md-sys-color-outline: #928f99;
+      }
+      body {
+        background-color: var(--md-sys-color-background);
+        color: var(--md-sys-color-on-background);
+      }
       @keyframes fade-in-down {
         from {
           opacity: 0;
@@ -32,8 +78,35 @@
   }
 }
 </script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: 'var(--md-sys-color-primary)',
+            'on-primary': 'var(--md-sys-color-on-primary)',
+            'primary-container': 'var(--md-sys-color-primary-container)',
+            'on-primary-container': 'var(--md-sys-color-on-primary-container)',
+            secondary: 'var(--md-sys-color-secondary)',
+            'on-secondary': 'var(--md-sys-color-on-secondary)',
+            'secondary-container': 'var(--md-sys-color-secondary-container)',
+            'on-secondary-container': 'var(--md-sys-color-on-secondary-container)',
+            error: 'var(--md-sys-color-error)',
+            'on-error': 'var(--md-sys-color-on-error)',
+            background: 'var(--md-sys-color-background)',
+            'on-background': 'var(--md-sys-color-on-background)',
+            surface: 'var(--md-sys-color-surface)',
+            'on-surface': 'var(--md-sys-color-on-surface)',
+            'surface-variant': 'var(--md-sys-color-surface-variant)',
+            'on-surface-variant': 'var(--md-sys-color-on-surface-variant)',
+            outline: 'var(--md-sys-color-outline)',
+          }
+        }
+      }
+    }
+  </script>
 </head>
-  <body class="bg-gray-100 dark:bg-gray-900">
+  <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

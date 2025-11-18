@@ -64,37 +64,39 @@ const OwnerDashboard: React.FC = () => {
       return statusMatch && employeeMatch;
     });
   }, [orders, filterStatus, filterEmployee]);
+  
+  const selectClasses = "bg-surface-variant/60 dark:bg-surface-variant/30 border-b-2 border-on-surface-variant rounded-t-lg focus:outline-none focus:border-primary p-2";
 
   return (
     <div className="space-y-6">
       {toastMessage && <Toast message={toastMessage} type="info" onClose={() => setToastMessage(null)} />}
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Owner Dashboard</h1>
+        <h1 className="text-3xl font-bold text-on-surface">Owner Dashboard</h1>
         <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-500 dark:text-gray-400">Live Sync Active</span>
+            <span className="text-sm text-on-surface-variant">Live Sync Active</span>
         </div>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <Card>
-            <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-b border-gray-200 dark:border-gray-700">
+          <Card className="!p-0">
+            <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-b border-outline/20">
                 <h2 className="text-xl font-semibold">All Orders</h2>
                 <div className="flex items-center gap-4">
-                    <select value={filterStatus} onChange={e => setFilterStatus(e.target.value as OrderStatus | 'all')} className="rounded-md dark:bg-gray-700 dark:border-gray-600">
+                    <select value={filterStatus} onChange={e => setFilterStatus(e.target.value as OrderStatus | 'all')} className={selectClasses}>
                         <option value="all">All Statuses</option>
                         {Object.values(OrderStatus).map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
-                    <select value={filterEmployee} onChange={e => setFilterEmployee(e.target.value)} className="rounded-md dark:bg-gray-700 dark:border-gray-600">
+                    <select value={filterEmployee} onChange={e => setFilterEmployee(e.target.value)} className={selectClasses}>
                         {employees.map(e => <option key={e} value={e}>{e === 'all' ? 'All Employees' : e}</option>)}
                     </select>
                 </div>
             </div>
             {isLoading ? (
-              <p className="p-4 text-center">Loading orders...</p>
+              <p className="p-6 text-center">Loading orders...</p>
             ) : error ? (
-              <p className="p-4 text-center text-red-500">{error}</p>
+              <p className="p-6 text-center text-error">{error}</p>
             ) : (
               <OrderList orders={filteredOrders} onUpdateOrder={handleUpdateOrder}/>
             )}

@@ -35,42 +35,47 @@ const RentalManager: React.FC = () => {
   }, []);
 
   if (isLoading) return <p>Loading rental data...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error) return <p className="text-error">{error}</p>;
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Rental Property Manager</h1>
+      <h1 className="text-3xl font-bold text-on-surface">Rental Property Manager</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card header={<h2 className="text-xl font-semibold">Tenant Overview</h2>}>
           <div className="space-y-4">
             {tenants.map(tenant => (
-              <div key={tenant.id} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-md">
+              <div key={tenant.id} className="p-3 bg-surface-variant/60 rounded-md">
                 <div className="flex justify-between items-center">
-                  <p className="font-bold">{tenant.name}</p>
+                  <p className="font-bold text-on-surface-variant">{tenant.name}</p>
                   <span className={`px-2 py-1 text-xs rounded-full ${tenant.pendingDues > 0 ? 'bg-red-200 text-red-800' : 'bg-green-200 text-green-800'}`}>
                     {tenant.pendingDues > 0 ? `Due: $${tenant.pendingDues}` : 'Paid'}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-on-surface-variant/80">
                   Property: {properties.find(p => p.id === tenant.propertyId)?.name} | Rent: ${tenant.rentAmount}/mo
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Contract ends: {tenant.contractExpiry}</p>
+                <p className="text-sm text-on-surface-variant/80">Contract ends: {tenant.contractExpiry}</p>
               </div>
             ))}
           </div>
         </Card>
 
         <Card header={<h2 className="text-xl font-semibold">Rental Income Dashboard</h2>}>
-          <div className="h-64">
+          <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={rentalIncomeData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--md-sys-color-outline)" />
+                <XAxis dataKey="name" tick={{ fill: 'var(--md-sys-color-on-surface-variant)' }} />
+                <YAxis tick={{ fill: 'var(--md-sys-color-on-surface-variant)' }} />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'var(--md-sys-color-surface)', 
+                    borderColor: 'var(--md-sys-color-outline)' 
+                  }}
+                />
                 <Legend />
-                <Bar dataKey="income" fill="#4f46e5" />
+                <Bar dataKey="income" fill="var(--md-sys-color-primary)" />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -48,20 +48,20 @@ const CreditManager: React.FC = () => {
   };
 
   if (isLoading) return <p>Loading customers...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error) return <p className="text-error">{error}</p>;
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Smart Credit Memory</h1>
+      <h1 className="text-3xl font-bold text-on-surface">Smart Credit Memory</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-1">
-          <Card header={<h2 className="text-xl font-semibold">Customers on Credit</h2>}>
-            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          <Card header={<h2 className="text-xl font-semibold">Customers on Credit</h2>} className="!p-0">
+            <ul className="divide-y divide-outline/20">
               {customers.map(customer => (
-                <li key={customer.id} className="py-3">
-                  <button onClick={() => handleSelectCustomer(customer)} className="w-full text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 rounded-md">
-                    <p className="font-medium">{customer.name}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Risk Score: {customer.riskScore}</p>
+                <li key={customer.id}>
+                  <button onClick={() => handleSelectCustomer(customer)} className="w-full text-left hover:bg-surface-variant/40 p-4">
+                    <p className="font-medium text-on-surface">{customer.name}</p>
+                    <p className="text-sm text-on-surface-variant">Risk Score: {customer.riskScore}</p>
                   </button>
                 </li>
               ))}
@@ -74,41 +74,41 @@ const CreditManager: React.FC = () => {
               <div className="flex justify-between items-start">
                   <div>
                     <h2 className="text-2xl font-bold">{selectedCustomer.name}</h2>
-                    <p className="text-gray-500 dark:text-gray-400">{selectedCustomer.phone}</p>
+                    <p className="text-on-surface-variant">{selectedCustomer.phone}</p>
                   </div>
                   <Button onClick={() => handleAnalyze(selectedCustomer)} isLoading={selectedCustomer.isLoading}>
                     {selectedCustomer.isLoading ? 'Analyzing...' : 'Re-analyze with AI'}
                   </Button>
               </div>
               
-              <div className="mt-6 grid grid-cols-2 gap-4 text-center">
-                    <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">AI Risk Score</p>
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
+                    <div className="p-4 bg-secondary-container text-on-secondary-container rounded-lg">
+                        <p className="text-sm font-medium">AI Risk Score</p>
                         <p className="text-3xl font-bold">{selectedCustomer.riskScore}</p>
                     </div>
-                    <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Predicted Repayment</p>
-                        <p className="text-3xl font-bold">{selectedCustomer.predictedRepaymentDate}</p>
+                    <div className="p-4 bg-secondary-container text-on-secondary-container rounded-lg">
+                        <p className="text-sm font-medium">Predicted Repayment</p>
+                        <p className="text-xl font-bold">{selectedCustomer.predictedRepaymentDate}</p>
                     </div>
               </div>
 
               <div className="mt-6">
-                <h3 className="font-semibold">Credit History</h3>
+                <h3 className="font-semibold text-lg">Credit History</h3>
                 <ul className="mt-2 space-y-2">
                   {selectedCustomer.creditHistory.length > 0 ? selectedCustomer.creditHistory.map((item, index) => (
-                    <li key={index} className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700/50 rounded-md">
-                      <span>${item.amount.toFixed(2)} on {item.date}</span>
+                    <li key={index} className="flex justify-between items-center p-3 bg-surface-variant/60 rounded-md">
+                      <span className="text-on-surface-variant">${item.amount.toFixed(2)} on {item.date}</span>
                       <span className={`px-2 py-1 text-xs font-semibold rounded-full ${item.paidOnTime ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
                         {item.paidOnTime ? 'Paid on Time' : 'Paid Late'}
                       </span>
                     </li>
-                  )) : <p className="text-gray-500">No credit history available.</p>}
+                  )) : <p className="text-on-surface-variant">No credit history available.</p>}
                 </ul>
               </div>
             </Card>
           ) : (
             <Card className="flex items-center justify-center h-full min-h-[400px]">
-              <p className="text-gray-500">Select a customer to view details</p>
+              <p className="text-on-surface-variant">Select a customer to view details</p>
             </Card>
           )}
         </div>

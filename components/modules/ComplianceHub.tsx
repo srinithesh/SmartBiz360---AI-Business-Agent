@@ -33,30 +33,30 @@ const ComplianceHub: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Compliance Reminder Hub</h1>
-      <Card>
+      <h1 className="text-3xl font-bold text-on-surface">Compliance Reminder Hub</h1>
+      <Card className="!p-0">
         {isLoading ? (
-          <p className="p-4 text-center">Loading compliance items...</p>
+          <p className="p-6 text-center">Loading compliance items...</p>
         ) : error ? (
-          <p className="p-4 text-center text-red-500">{error}</p>
+          <p className="p-6 text-center text-error">{error}</p>
         ) : (
-          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          <ul className="divide-y divide-outline/20">
             {items.sort((a,b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()).map(item => {
               const daysLeft = getDaysLeft(item.dueDate);
               const isOverdue = daysLeft < 0;
               const isSoon = daysLeft <= 7 && daysLeft >= 0;
 
               return (
-                <li key={item.id} className="py-4 flex items-center justify-between">
+                <li key={item.id} className="py-4 px-6 flex items-center justify-between">
                   <div>
-                    <p className="font-semibold">{item.name}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Category: {item.category}</p>
+                    <p className="font-semibold text-on-surface">{item.name}</p>
+                    <p className="text-sm text-on-surface-variant">Category: {item.category}</p>
                   </div>
                   <div className="text-right">
-                    <p className={`font-bold ${isOverdue ? 'text-red-500' : isSoon ? 'text-yellow-500' : ''}`}>
+                    <p className={`font-bold ${isOverdue ? 'text-error' : isSoon ? 'text-yellow-500' : 'text-on-surface'}`}>
                       {isOverdue ? `Overdue by ${Math.abs(daysLeft)} days` : `${daysLeft} days left`}
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Due: {item.dueDate}</p>
+                    <p className="text-sm text-on-surface-variant">Due: {item.dueDate}</p>
                   </div>
                 </li>
               );

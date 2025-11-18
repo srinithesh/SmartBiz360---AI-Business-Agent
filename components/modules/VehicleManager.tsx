@@ -38,8 +38,8 @@ const VehicleManager: React.FC = () => {
     
     return (
         <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500 dark:text-gray-400">{label}:</span>
-            <span className={`font-medium ${isOverdue ? 'text-red-500' : isSoon ? 'text-yellow-500' : ''}`}>
+            <span className="text-on-surface-variant">{label}:</span>
+            <span className={`font-medium ${isOverdue ? 'text-error' : isSoon ? 'text-yellow-500' : 'text-on-surface'}`}>
                 {date} ({daysLeft > 0 ? `${daysLeft} days left` : `overdue ${Math.abs(daysLeft)} days`})
             </span>
         </div>
@@ -48,21 +48,21 @@ const VehicleManager: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Vehicle Reminder System</h1>
+      <h1 className="text-3xl font-bold text-on-surface">Vehicle Reminder System</h1>
       {isLoading ? (
         <p>Loading vehicles...</p>
       ) : error ? (
-        <p className="text-red-500">{error}</p>
+        <p className="text-error">{error}</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {vehicles.map(vehicle => (
             <Card key={vehicle.id} header={
               <div>
                 <h2 className="text-xl font-semibold">{vehicle.name}</h2>
-                <p className="text-sm font-mono text-gray-500 dark:text-gray-400">{vehicle.number}</p>
+                <p className="text-sm font-mono text-on-surface-variant">{vehicle.number}</p>
               </div>
             }>
-              <div className="space-y-2">
+              <div className="space-y-3">
                   <ReminderItem label="Insurance" date={vehicle.insuranceExpiry} />
                   <ReminderItem label="PUC" date={vehicle.pucExpiry} />
                   <ReminderItem label="Fitness Cert (FC)" date={vehicle.fcExpiry} />

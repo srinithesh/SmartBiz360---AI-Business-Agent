@@ -65,19 +65,18 @@ const BehavioralAuth: React.FC = () => {
     switch (step) {
       case 'initial':
         return (
-          <div className="space-y-4">
-            <p>Set up or test your Behavioral Authentication. This replaces your password with personal questions only you can answer.</p>
+          <div className="space-y-6">
+            <p className="text-on-surface-variant">Set up or test your Behavioral Authentication. This replaces your password with personal questions only you can answer.</p>
             <Input 
                 label="Enter a personal topic for questions"
-                placeholder="e.g., My first car, My favorite travel destination"
                 value={personalTopic}
                 onChange={e => setPersonalTopic(e.target.value)}
             />
-            <div className="flex gap-4">
+            <div className="flex gap-4 pt-2">
                 <Button onClick={handleStartSetup} isLoading={isLoading} disabled={!personalTopic}>
                     {storedAnswers ? "Reset Setup" : "Start Setup"}
                 </Button>
-                {storedAnswers && <Button onClick={startVerification} variant="secondary">Verify Identity</Button>}
+                {storedAnswers && <Button onClick={startVerification} variant="outlined">Verify Identity</Button>}
             </div>
           </div>
         );
@@ -87,18 +86,18 @@ const BehavioralAuth: React.FC = () => {
             <div className="space-y-6">
                 {questions.map((q, qIndex) => (
                     <div key={qIndex}>
-                        <p className="font-semibold">{q.question}</p>
+                        <p className="font-semibold text-on-surface">{q.question}</p>
                         <div className="mt-2 space-y-2">
                             {q.options.map((opt, aIndex) => (
-                                <label key={aIndex} className={`flex items-center p-3 rounded-md border cursor-pointer ${answers[qIndex] === aIndex ? 'bg-indigo-100 dark:bg-indigo-900 border-indigo-500' : 'dark:border-gray-600'}`}>
-                                    <input type="radio" name={`q-${qIndex}`} className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" onChange={() => handleAnswerSelect(qIndex, aIndex)}/>
-                                    <span className="ml-3 text-sm">{opt}</span>
+                                <label key={aIndex} className={`flex items-center p-3 rounded-lg border-2 cursor-pointer ${answers[qIndex] === aIndex ? 'bg-primary-container border-primary' : 'border-outline'}`}>
+                                    <input type="radio" name={`q-${qIndex}`} className="h-4 w-4 text-primary border-gray-300 focus:ring-primary" onChange={() => handleAnswerSelect(qIndex, aIndex)}/>
+                                    <span className="ml-3 text-sm text-on-surface">{opt}</span>
                                 </label>
                             ))}
                         </div>
                     </div>
                 ))}
-                {verificationError && <p className="text-red-500 font-bold">Answers do not match. Please try again.</p>}
+                {verificationError && <p className="text-error font-bold">Answers do not match. Please try again.</p>}
                 <Button onClick={step === 'setup' ? saveAnswers : handleVerify} disabled={Object.keys(answers).length !== questions.length}>
                     {step === 'setup' ? 'Save Answers' : 'Verify My Identity'}
                 </Button>
@@ -108,7 +107,7 @@ const BehavioralAuth: React.FC = () => {
         return (
             <div className="text-center space-y-4">
                 <p className="text-2xl font-bold text-green-500">Verification Successful!</p>
-                <p>Access granted. The master password has been revealed/auto-filled.</p>
+                <p className="text-on-surface-variant">Access granted. The master password has been revealed/auto-filled.</p>
                 <Button onClick={() => setStep('initial')}>Done</Button>
             </div>
         );
@@ -117,8 +116,8 @@ const BehavioralAuth: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Behavioral Password Authentication</h1>
-      <Card header={<h2 className="text-xl font-semibold">{step.charAt(0).toUpperCase() + step.slice(1)}</h2>}>
+      <h1 className="text-3xl font-bold text-on-surface">Behavioral Password Authentication</h1>
+      <Card header={<h2 className="text-xl font-semibold">{step.charAt(0).toUpperCase() + step.slice(1)} Stage</h2>}>
         {renderContent()}
       </Card>
     </div>

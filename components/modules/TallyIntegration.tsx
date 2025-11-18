@@ -27,17 +27,17 @@ const TallyIntegration: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Tally ERP Integration</h1>
+      <h1 className="text-3xl font-bold text-on-surface">Tally ERP Integration</h1>
       <Card header={<h2 className="text-xl font-semibold">Data Synchronization</h2>}>
         <div className="space-y-4">
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-on-surface-variant">
             Automate your accounting by syncing invoice data directly to Tally ERP and generating e-way bills with a single click.
           </p>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 pt-2">
             <Button onClick={handleSync} isLoading={isSyncing}>
               Sync Invoice Data
             </Button>
-            <Button onClick={handleGenerateEWay} isLoading={isGenerating} variant="secondary">
+            <Button onClick={handleGenerateEWay} isLoading={isGenerating} variant="outlined">
               Generate E-Way Bill
             </Button>
           </div>

@@ -59,7 +59,7 @@ const PlaceholderDashboard: React.FC = () => {
         switch (user?.role) {
             case UserRole.Employee:
                 return (
-                    <Card header={<h2 className="text-xl font-semibold">Your Assigned Orders</h2>}>
+                    <Card header={<h2 className="text-xl font-semibold">Your Assigned Orders</h2>} className="!p-0">
                         <OrderList orders={orders} onUpdateOrder={() => {}} />
                     </Card>
                 );
@@ -73,7 +73,7 @@ const PlaceholderDashboard: React.FC = () => {
                             <Input label="Customer" value={otpOrder.customerName} disabled />
                             <Input label="OTP Code" placeholder="Enter 6-digit OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
                             <Button className="w-full" onClick={handleVerifyOtp}>Verify & Complete Delivery</Button>
-                            {otpMessage && <p className={`text-sm font-bold ${otpMessage.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>{otpMessage.text}</p>}
+                            {otpMessage && <p className={`text-sm font-bold ${otpMessage.type === 'success' ? 'text-green-500' : 'text-error'}`}>{otpMessage.text}</p>}
                         </div>
                        ) : (
                         <p>No orders currently out for delivery.</p>
@@ -82,8 +82,8 @@ const PlaceholderDashboard: React.FC = () => {
                 );
             case UserRole.Accountant:
                 return (
-                    <Card header={<h2 className="text-xl font-semibold">Credit & Payments</h2>}>
-                        <p>Showing orders with pending payments or on credit.</p>
+                    <Card header={<h2 className="text-xl font-semibold">Credit & Payments</h2>} className="!p-0">
+                        <p className="p-6 text-on-surface-variant">Showing orders with pending payments or on credit.</p>
                         <OrderList orders={orders} onUpdateOrder={() => {}} />
                     </Card>
                 );
@@ -94,7 +94,7 @@ const PlaceholderDashboard: React.FC = () => {
 
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{user?.role} Dashboard</h1>
+            <h1 className="text-3xl font-bold text-on-surface">{user?.role} Dashboard</h1>
             {renderContent()}
         </div>
     );
