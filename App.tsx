@@ -1,25 +1,28 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import DashboardLayout from './components/layout/DashboardLayout';
-import { AuthProvider } from './contexts/AuthContext';
-import { UserRole } from './types';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginScreen from './components/auth/LoginScreen';
 
+const AppContent: React.FC = () => {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return user ? <DashboardLayout /> : <LoginScreen />;
+}
+
 function App() {
-  const [user, setUser] = useState<{ name: string; role: UserRole } | null>(null);
-
-  const handleLogin = (name: string, role: UserRole) => {
-    setUser({ name, role });
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
-
   return (
-    <AuthProvider value={{ user, login: handleLogin, logout: handleLogout }}>
+    <AuthProvider>
       <div className="min-h-screen bg-background text-on-background">
-        {user ? <DashboardLayout /> : <LoginScreen />}
+        <AppContent />
       </div>
     </AuthProvider>
   );
