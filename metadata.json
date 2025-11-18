@@ -1,0 +1,7 @@
+{
+  "name": "SmartBiz360 - AI Business Agent",
+  "description": "An AI-powered agent to automate daily workflows for small businesses, featuring smart order management, credit analysis, property management, compliance reminders, and advanced security modules.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
